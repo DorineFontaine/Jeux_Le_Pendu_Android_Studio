@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fueille"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DBEAF1"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/img_pendu"
+        android:layout_width="200dp"
+        android:layout_height="290dp"
+        android:background="@drawable/first"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/A"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="A"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/B"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="B"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/C"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="C"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/D"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="D"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/E"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="E"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/F"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="F"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/G"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="G"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/H"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="H"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/I"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="I"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/J"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="J"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/K"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="K"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/L"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="L"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/M"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="M"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/N"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="N"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/O"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="O"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/P"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="P"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/Q"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="Q"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/R"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="R"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/S"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="S"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/T"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="T"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/U"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="U"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/V"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="V"
+                app:backgroundTint="@color/color_clavier"
+                app:layout_constraintLeft_toRightOf="@id/P"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/W"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="W"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/X"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="X"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/Y"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="Y"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+
+            <Button
+                android:id="@+id/Z"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/custom_button"
+                android:text="Z"
+                app:backgroundTint="@color/color_clavier"
+                android:onClick="pressButton"/>
+        </TableRow>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
