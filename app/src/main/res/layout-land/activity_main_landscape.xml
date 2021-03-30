@@ -11,6 +11,8 @@
         android:id="@+id/img_pendu"
         android:layout_width="150dp"
         android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/first"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

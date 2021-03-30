@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">LePendu</string>
     <string name="rejouer">REJOUER</string>
+    <string name="menu">MENU</string>
 </resources>

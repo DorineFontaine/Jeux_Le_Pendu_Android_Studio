@@ -1,206 +1,75 @@
 package com.example.lependu_38007562;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import java.io.Serializable;
 
-import java.util.ArrayList;
+public class MainActivity extends Activity {
 
-public class MainActivity extends AppCompatActivity {
-
-    String word;
-    int letter_found;
-    int error;
-    ArrayList<Integer> listeIdButton= new ArrayList<Integer>();
-    LinearLayout container;
-    private ImageView images;
-    private boolean win;
-    Dialog dialog_open,dialog_close;
-
-
+    ListView simpleList;
+    String countryList[] = {"PAYS", "VILLE", "MARQUE DE VOITURE ", "ANIMAUX", "FRUITS ET LEGUMES", "COULEURS","MARQUE DE VETEMENTS"};
+    int flags[] = {R.drawable.pays, R.drawable.ville, R.drawable.voiture, R.drawable.animaux, R.drawable.fruit, R.drawable.couleur,R.drawable.vetement};
+    String pays[]={"CHINE","RUSSIE","FRANCE"};
+    String fruit[]={"CAROTTE","COURGETTE","OLIVE"};
+    String animaux[]={"CHIEN","CHAT","ANE"};
+    String ville[]={"TOKYO","DELHIE","PARIS"};
+    String marque_voiture[]={"TOYOTA","AUDI","PEUGEOT"};
+    String couleur[]={"BLEU","ROUGE","NOIR"};
+    String vetement[]={"LACOSTE","KIABI","ASSOS"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        simpleList = (ListView) findViewById(R.id.simpleListView);
+        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), countryList, flags);
+        simpleList.setAdapter(customAdapter);
+        simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        container=(LinearLayout)findViewById(R.id.word_container);
-        images=(ImageView)findViewById(R.id.img_pendu);
-        dialog_open=new Dialog(this);
-        dialog_close=new Dialog(this);
-        initJeux();
-    }
-    public void initJeux() {
-        word = "MICHELINE";
-        win= false;
-        error = 0;
-        letter_found = 0;
-        images.setBackgroundResource(R.drawable.first);
-        //Création dynamique de textView
-        container.removeAllViews();
-        for (int i = 0; i < word.length(); i++) {
-            TextView view = (TextView) getLayoutInflater().inflate(R.layout.textview, null);
-            container.addView(view);
-        }
-
-    }
-
-    public void estDedans(String l, String word){
-        for(int i=0;i<word.length();i++){
-            if(l.equals(String.valueOf(word.charAt(i)))){
-                TextView view=(TextView)container.getChildAt(i);
-                view.setText((String.valueOf(word.charAt(i))));
-                letter_found++;
+                sendInfo(position);
             }
-
-
-        }
-
+        });
     }
 
+    public void sendInfo(int nombre){
 
 
-    public void gagnerOupas(String b){
-        if(letter_found==word.length()){
-            win=true;
-            openWinDialog();
+        Intent i= new Intent(this, MainActivity2.class);
 
-
-        }
-
-        //La lettre n'est pas dans le mot
-        if(!word.contains(b)){
-            error++;
-        }
-        setImageErreur(error);
-        if(error==11){
-            win=false;
-
-            closeWinDialog();
-
-
-        }
-
-    }
-
-    public void setImageErreur(int e){
-        switch(e){
+        switch(nombre){
+            case 0:
+                i.putExtra("array", (Serializable)pays);
+                break;
             case 1:
-                images.setBackgroundResource(R.drawable.second);
+                i.putExtra("array", (Serializable)ville);
                 break;
 
             case 2:
-                images.setBackgroundResource(R.drawable.third);
+                i.putExtra("array", (Serializable)marque_voiture);
                 break;
-
             case 3:
-                images.setBackgroundResource(R.drawable.four);
+                i.putExtra("array", (Serializable)animaux);
                 break;
-
-
             case 4:
-                images.setBackgroundResource(R.drawable.five);
+                i.putExtra("array", (Serializable)fruit);
                 break;
-
             case 5:
-                images.setBackgroundResource(R.drawable.six);
+                i.putExtra("array", (Serializable)couleur);
                 break;
 
             case 6:
-                images.setBackgroundResource(R.drawable.seven);
+                i.putExtra("array", (Serializable)vetement);
                 break;
 
+
         }
-
-
-    }
-    public void reStart(){
-        do{
-            for(int i=0;i>listeIdButton.size();i++){
-                int id=(int)listeIdButton.get(i);
-                //Button btn = (Button) findViewById(R.id.);
-                //btn.setEnabled(true);
-
-
-            }
-        }while(!listeIdButton.isEmpty());
-
-    }
-    public void boiteDialog(boolean win){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        if(!win){
-            builder.setTitle("Vous avez perdu");
-            builder.setMessage("Le mot à trouver était :"+ word);
-
-
-        }else{
-            builder.setTitle("vous avez gagné ");
-        }
-        builder.setPositiveButton(getResources().getString(R.string.rejouer), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                initJeux();
-            }
-        });
-        builder.create().show();
-
-    }
-
-    private void openWinDialog(){
-        dialog_open.setContentView(R.layout.victoire_layout_dialog);
-        dialog_close.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Button btn=dialog_open.findViewById(R.id.btn_rejouer);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initJeux();
-                dialog_open.dismiss();
-
-
-            }
-        });
-        dialog_open.show();
-    }
-    private void closeWinDialog(){
-        dialog_close.setContentView(R.layout.defaite_layout_dialog);
-        dialog_close.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        Button btn=dialog_close.findViewById(R.id.btn_rejouer);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initJeux();
-                dialog_close.dismiss();
-
-
-            }
-        });
-        dialog_close.show();
+        startActivity(i);
     }
 
 
-    public void pressButton(View v) {
-        Button btn = (Button) findViewById(v.getId());
-        listeIdButton.add(v.getId());
-        String textButton = btn.getText().toString();
-        estDedans(textButton,word); //on incremente ou non trouver
-        btn.setEnabled(false);
-
-        //Gestion des erreurs ou victoire
-        gagnerOupas(textButton);
-        //reStart();
-
-    }
 }
