@@ -8,11 +8,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import java.io.Serializable;
 
-public class MainActivity extends Activity {
+public class Activity_liste extends Activity {
 
     ListView simpleList;
-    String countryList[] = {"PAYS", "VILLE", "MARQUE DE VOITURE ", "ANIMAUX", "FRUITS ET LEGUMES", "COULEURS","MARQUE DE VETEMENTS"};
-    int flags[] = {R.drawable.pays, R.drawable.ville, R.drawable.voiture, R.drawable.animaux, R.drawable.fruit, R.drawable.couleur,R.drawable.vetement};
+    String countryList[] = {"PAYS", "VILLE", "MARQUE DE VOITURE ", "ANIMAUX", "FRUITS ET LEGUMES", "COULEURS","MARQUE DE VETEMENTS","ALEATOIRE"};
+    int flags[] = {R.drawable.pays, R.drawable.ville, R.drawable.voiture, R.drawable.animaux, R.drawable.fruit, R.drawable.couleur,R.drawable.vetement,R.drawable.pays};
     String pays[]={"CHINE","RUSSIE","FRANCE"};
     String fruit[]={"CAROTTE","COURGETTE","OLIVE"};
     String animaux[]={"CHIEN","CHAT","ANE"};
@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_liste);
         simpleList = (ListView) findViewById(R.id.simpleListView);
         CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), countryList, flags);
         simpleList.setAdapter(customAdapter);
@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
     public void sendInfo(int nombre){
 
 
-        Intent i= new Intent(this, MainActivity2.class);
+        Intent i= new Intent(this, Activity_Jeu.class);
 
         switch(nombre){
             case 0:

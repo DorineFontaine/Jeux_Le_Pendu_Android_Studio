@@ -7,11 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="color_clavier">#476C9B</color>
+    <color name="color_clavier">#69585F</color>
     <color name="color_text_clavier">#000000</color>
     <color name="colorYello">#FFC107</color>
     <color name="colorRed">#CC0033</color>
     <color name="text_bouton">#476C9B</color>
+    <color name="aide_btn">#BAA898</color>
+    <color name="couleur">#FE5E41</color>
 
 
 </resources>
