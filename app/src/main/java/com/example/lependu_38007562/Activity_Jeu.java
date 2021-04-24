@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,13 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-
-
 import java.util.ArrayList;
 
 public class Activity_Jeu extends Activity {
-    String[] ALea =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
 
+    int a=0;
+    int number=0;
     String word;
     int letter_found;
     int error;
@@ -28,11 +28,13 @@ public class Activity_Jeu extends Activity {
     private ImageView images;
     private boolean win;
     Dialog dialog_win, dialog_lose,dialog_help;
-    ArrayList<String> letter_use_clavier;
+    ArrayList<String> letter_found_clavier;
+    ArrayList<String> letter_word;
     String letter_revealed;
-
+    String[] ALeatoire =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
     String[] myList;
    // Intent i= new Intent(this, MainActivity2.class);
+
 
 
 
@@ -41,49 +43,78 @@ public class Activity_Jeu extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jeu);
-        letter_use_clavier = new ArrayList<String>();
+        letter_found_clavier = new ArrayList<String>();
+        letter_word = new ArrayList<String>();
         container = (LinearLayout)findViewById(R.id.word_container);
         images=(ImageView)findViewById(R.id.img_pendu);
         listeButton = new ArrayList<Button>();
         dialog_win = new Dialog(this);
         dialog_lose = new Dialog(this);
         dialog_help = new Dialog(this);
+
         Bundle word_array = getIntent().getExtras();
         if (word_array != null){
+            Log.d("myTag", "j'ai recupere mon tableu Activity_jeux");
+
             this.myList = (String[]) word_array.getSerializable("array");
         }
 
-         word = myList[0];
-        initJeux();
+
+            initJeux();
+
+
 
 
     }
+
     public void initJeux() {
+        if (number<=Math.max(ALeatoire.length,myList.length)) {
+            if (myList != null) word = myList[number];
+            else word = ALeatoire[number];
+            number++;
+        }else number=0;
 
         win= false;
         error = 0;
         letter_found = 0;
         images.setBackgroundResource(R.drawable.first);
         //Création dynamique de textView
-
+        reStart();
         container.removeAllViews();
-        //reStart();
         for (int i = 0; i < word.length(); i++) {
             TextView view = (TextView) getLayoutInflater().inflate(R.layout.textview, null);
             container.addView(view);
         }
 
+
+
+
+
+
+    }
+    public ArrayList<String> ArrayLetterWord(String word){
+        for (int i=0; i <word.length();i++){
+            letter_word.add(String.valueOf(word.charAt(i)));
+
+
+        }
+        return letter_word;
     }
 
-    public void isIn(String l, String word){
-        for(int i=0;i<word.length();i++){
-            if(l.equals(String.valueOf(word.charAt(i)))){
-                TextView view=(TextView)container.getChildAt(i);
+
+    public void isIn(String l, String word) {
+
+        for (int i = 0; i < word.length(); i++) {
+            if (l.equals(String.valueOf(word.charAt(i)))) {
+                TextView view = (TextView) container.getChildAt(i);
                 view.setText((String.valueOf(word.charAt(i))));
                 letter_found++;
+                letter_found_clavier.add(l);
+
             }
         }
     }
+
 
 
 
@@ -143,22 +174,19 @@ public class Activity_Jeu extends Activity {
 
 
     }
-/*
+
     public void reStart(){
-     if (!listeButton.isEmpty()){
-         do{
-             for(int i=0;i>listeButton.size();i++){
+
+
+             for(int i=0;i<listeButton.size();i++){
                  Button button_activate=(Button)listeButton.get(i);
                  button_activate.setEnabled(true);
 
 
              }
-         }while(!listeButton.isEmpty());
 
 
-     }
-
-    }*/
+    }
 
     private void openWinDialog(){
         dialog_win.setContentView(R.layout.victoire);
@@ -199,16 +227,19 @@ public class Activity_Jeu extends Activity {
     public void pressButton(View v) {
         Button btn = (Button) findViewById(v.getId());
         btn.setEnabled(false);
+        Log.d("my tag","CCCCCCCCCCCCCCCCC");
         //on ajoute le bouton dans un tableau de bouton pour le réactiver par la suite
         listeButton.add(btn);
         String textButton = btn.getText().toString();
-        letter_use_clavier.add(textButton);
+        letter_found_clavier.add(textButton);
+
         isIn(textButton,word); //on incremente ou non trouver
 
 
 
         //Gestion des erreurs ou victoire
         winOrnot(textButton);
+        a++;
 
 
     }
@@ -253,28 +284,7 @@ public class Activity_Jeu extends Activity {
         dialog_help.show();
 
     }
-    public void showLetter(){
-
-       if(!letter_use_clavier.isEmpty()) {
-
-
-            for (int i = 0; i <word.length() ; i++) {
-                String l = String.valueOf(word.charAt(i));
-                for (int j = 0; j < letter_use_clavier.size(); j++) {
-                    if (!l.equals(letter_use_clavier.get(j))){
-
-                    letter_revealed =  l;
-                    return;
-
-
-                }
-
-
-
-            }
-        }}else{
-            letter_revealed=String.valueOf(word.charAt(0)) ;
-        }
+    public void showLetter( ) {
 
     }
 

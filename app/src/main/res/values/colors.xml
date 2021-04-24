@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_clavier">#69585F</color>
+    <color name="pay">#4E8098</color>
     <color name="color_text_clavier">#000000</color>
     <color name="colorYello">#FFC107</color>
     <color name="colorRed">#CC0033</color>

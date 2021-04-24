@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/jouer"
-        android:layout_width="350dp"
+        android:layout_width="450dp"
         android:layout_height="70dp"
         android:layout_marginBottom="10dp"
         android:onClick="startGame"
@@ -21,9 +21,9 @@
 
     <Button
         android:id="@+id/btn_reglage"
-        android:layout_width="350dp"
+        android:layout_width="450dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="10dp"
         android:onClick="getSetUp"
         android:text="THEME"
         app:backgroundTint="@color/couleur"
@@ -33,8 +33,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="250dp"
-        android:layout_height="300dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toTopOf="@+id/jouer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
