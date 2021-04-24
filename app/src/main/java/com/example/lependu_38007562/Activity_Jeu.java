@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Activity_Jeu extends Activity {
 
@@ -26,13 +27,13 @@ public class Activity_Jeu extends Activity {
     ArrayList<Button> listeButton;
     LinearLayout container;
     private ImageView images;
-    private boolean win;
-    Dialog dialog_win, dialog_lose,dialog_help;
+
+    Dialog dialog_result,dialog_help;
     ArrayList<String> letter_found_clavier;
     ArrayList<String> letter_word;
     String letter_revealed;
     String[] ALeatoire =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
-    String[] myList;
+    String[]  myList;
    // Intent i= new Intent(this, MainActivity2.class);
 
 
@@ -48,15 +49,14 @@ public class Activity_Jeu extends Activity {
         container = (LinearLayout)findViewById(R.id.word_container);
         images=(ImageView)findViewById(R.id.img_pendu);
         listeButton = new ArrayList<Button>();
-        dialog_win = new Dialog(this);
-        dialog_lose = new Dialog(this);
+        dialog_result = new Dialog(this);
         dialog_help = new Dialog(this);
 
         Bundle word_array = getIntent().getExtras();
         if (word_array != null){
             Log.d("myTag", "j'ai recupere mon tableu Activity_jeux");
 
-            this.myList = (String[]) word_array.getSerializable("array");
+            this.myList = (String[] ) word_array.getSerializable("array");
         }
 
 
@@ -68,16 +68,17 @@ public class Activity_Jeu extends Activity {
     }
 
     public void initJeux() {
-        if (number<=Math.max(ALeatoire.length,myList.length)) {
+        if (number <= Math.max(ALeatoire.length,myList.length)) {
             if (myList != null) word = myList[number];
             else word = ALeatoire[number];
             number++;
         }else number=0;
 
-        win= false;
+
         error = 0;
         letter_found = 0;
         images.setBackgroundResource(R.drawable.first);
+
         //Création dynamique de textView
         reStart();
         container.removeAllViews();
@@ -90,8 +91,9 @@ public class Activity_Jeu extends Activity {
 
 
 
+        }
 
-    }
+
     public ArrayList<String> ArrayLetterWord(String word){
         for (int i=0; i <word.length();i++){
             letter_word.add(String.valueOf(word.charAt(i)));
@@ -119,9 +121,10 @@ public class Activity_Jeu extends Activity {
 
 
     public void winOrnot(String b){
+
         if(letter_found==word.length()){
-            win=true;
-            openWinDialog();
+
+            closeWinDialog(true);
 
 
         }
@@ -132,9 +135,9 @@ public class Activity_Jeu extends Activity {
         }
         setImageError(error);
         if(error==7){
-            win=false;
 
-            closeWinDialog();
+
+            closeWinDialog(false);
 
 
         }
@@ -188,37 +191,39 @@ public class Activity_Jeu extends Activity {
 
     }
 
-    private void openWinDialog(){
-        dialog_win.setContentView(R.layout.victoire);
-        //dialog_win.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        Button btn= dialog_win.findViewById(R.id.btn_rejouer);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initJeux();
-                dialog_win.dismiss();
 
+    private void closeWinDialog(Boolean win){
+        Intent j = new Intent(this, Activity_menu.class);
+        if (win ) dialog_result.setContentView(R.layout.victoire);
+        else dialog_result.setContentView(R.layout.defaite);
 
-            }
-        });
-        dialog_win.show();
-    }
-    private void closeWinDialog(){
-        dialog_lose.setContentView(R.layout.defaite);
       //  dialog_lose.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
-        Button btn= dialog_lose.findViewById(R.id.btn_rejouer);
+        Button btn= dialog_result.findViewById(R.id.btn_rejouer);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 initJeux();
-                dialog_lose.dismiss();
+                dialog_result.dismiss();
 
 
             }
         });
-        dialog_lose.show();
+        Button btn2= dialog_result.findViewById(R.id.menu);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(j);
+                dialog_result.dismiss();
+
+
+
+
+            }
+        });
+        dialog_result.show();
 
 
     }

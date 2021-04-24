@@ -11,8 +11,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Activity_liste extends Activity {
 
@@ -28,6 +32,7 @@ public class Activity_liste extends Activity {
     String vetement[]={"LACOSTE","KIABI","ASSOS"};
     String[] ALeatoire =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
     Intent i;
+    ArrayList<String> wordList;
     ArrayList<View> listeView=new ArrayList<View>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,6 @@ public class Activity_liste extends Activity {
 
         switch(nombre){
             case 0:
-
                 i.putExtra("array", (Serializable)pays);
                 startActivity(i);
                 break;
@@ -115,10 +119,25 @@ public class Activity_liste extends Activity {
 
     }
 
-    public void reglage(View v) {
+   public ArrayList<String> getArrayWorld(String fichier){
+
+       try {
+           BufferedReader buffer = new BufferedReader( new InputStreamReader(getAssets().open(fichier)));
+           String word;
+           while((word = buffer.readLine()) != null){
+               wordList.add(word);
 
 
-    }
+           }
+           buffer.close();
+
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+
+
+       return wordList;
+   }
 
 
 }
