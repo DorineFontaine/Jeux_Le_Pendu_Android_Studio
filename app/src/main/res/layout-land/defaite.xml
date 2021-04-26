@@ -7,19 +7,6 @@
 
     <ImageView android:layout_height="wrap_content" android:layout_width="match_parent" android:src="@drawable/perdu" android:id="@+id/imageView6"/>
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="match_parent"
-            android:layout_height="340dp"
-            android:src="@drawable/defaite" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold|italic" />
-
     </LinearLayout>
 
 

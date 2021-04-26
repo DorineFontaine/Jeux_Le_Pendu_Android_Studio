@@ -12,10 +12,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Activity_menu extends AppCompatActivity {
-    String[] ALea =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
-    String[] test;
-    Bundle word_array;
 
+    //TABLEAUX ET VARIABLES
+    String[] ALea =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
+    Bundle word_array;
+    Serializable myArray;
     
 
     @Override
@@ -25,32 +26,26 @@ public class Activity_menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         word_array = getIntent().getExtras();
 
+        //On récupére le tableau de mot
         if (word_array != null){
-            Log.d("myTag", "Mon tableau test se rempli");
-            this.test = (String[]) word_array.getSerializable("array");
-        }
-    }
+            myArray = word_array.getSerializable("array");
+        } }
 
+    //REDIRECTION VERS LE JEUX
     public void startGame(View view) {
 
+        //On transmet le tableau de mot à l'activité Jeux
         Intent i = new Intent(this, Activity_Jeu.class);
-        if (test == null){
-            Log.d("myTag", "mon test est null");
+        if (myArray == null){
 
             i.putExtra("array", (Serializable)ALea);
-            startActivity(i);
-        } else{
-            i.putExtra("array", (Serializable)test);
+            startActivity(i); }
+        else{
 
-        }
+            i.putExtra("array", myArray); }
+        startActivity(i); }
 
-
-
-        startActivity(i);
-
-
-    }
-
+    //REDIRECTION VERS LE JEUX
     public void getSetUp(View view) {
         Intent i = new Intent(this, Activity_liste.class);
         startActivity(i);

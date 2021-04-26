@@ -7,33 +7,29 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Activity_liste extends Activity {
 
+    //TABLEAU ET VARIABLE
     ListView simpleList;
-    String countryList[] = {"PAYS", "VILLE", "MARQUE DE VOITURE ", "ANIMAUX", "FRUITS ET LEGUMES", "COULEURS","MARQUE DE VETEMENTS","ALEATOIRE"};
+    String countryList[] = {String.valueOf(R.string.pays), "VILLE", "MARQUE DE VOITURE ", "ANIMAUX", "FRUITS ET LEGUMES", "COULEURS","MARQUE DE VETEMENTS","ALEATOIRE"};
     int flags[] = {R.drawable.drapeau, R.drawable.ville, R.drawable.voiture, R.drawable.animaux, R.drawable.fruit, R.drawable.couleur,R.drawable.vetement,R.drawable.aleatoire};
-    String pays[]={"CHINE","RUSSIE","FRANCE"};
-    String fruit[]={"CAROTTE","COURGETTE","OLIVE"};
-    String animaux[]={"CHIEN","CHAT","ANE"};
-    String ville[]={"TOKYO","DELHIE","PARIS"};
-    String marque_voiture[]={"TOYOTA","AUDI","PEUGEOT"};
-    String couleur[]={"BLEU","ROUGE","NOIR"};
-    String vetement[]={"LACOSTE","KIABI","ASSOS"};
-    String[] ALeatoire =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
+
     Intent i;
+    String themeString;
     ArrayList<String> wordList;
-    ArrayList<View> listeView=new ArrayList<View>();
+    ArrayList<String> comList;
+    ArrayList<View> listeView = new ArrayList<View>();
+    int theme;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,13 +41,15 @@ public class Activity_liste extends Activity {
         simpleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //décoloration du themes aprés selection
                 if(listeView!=null){
-                    for(int p =0; p<listeView.size();p++){
+                    for(int p =0; p < listeView.size(); p++){
                         listeView.get(p).setBackgroundColor(Color.WHITE);
-
                     }
-
                 }
+
+                //coloration du themes selectionne
                 View text = customAdapter.getView2(view);
                 text.setBackgroundColor(Color.rgb(105,83,95));
                 sendInfo(position);
@@ -60,84 +58,90 @@ public class Activity_liste extends Activity {
 
                 listeView.add(text);
                 listeView.add(view);
-            }
-        });
+            }});
         i = new Intent(this, Activity_menu.class);
+        wordList = new ArrayList<String>();
+        comList = new ArrayList<String>();
 
     }
 
     public void sendInfo(int nombre){
+        comList = getArrayWord("INDICE.txt");
 
 
-
+        //Envoie du tableau de mot au menu selon le theme selectionné
 
         switch(nombre){
             case 0:
-                i.putExtra("array", (Serializable)pays);
+                Log.d("test","je suis dans le cas 0");
+               // wordList = getArrayWord("PAYS.txt" );
+                themeString = "PAYS.txt";
+
+                theme = 0;
+                i.putExtra("String",themeString);
                 startActivity(i);
                 break;
-            case 1:
 
-                i.putExtra("array", (Serializable)ville);
-                startActivity(i);
+            case 1:
+                wordList = getArrayWord("VILLE.txt" );
+                theme = 1;
                 break;
 
             case 2:
-
-                i.putExtra("array", (Serializable)marque_voiture);
-                startActivity(i);
+                wordList = getArrayWord("VOITURE.txt" );
+                theme = 2;
                 break;
+
             case 3:
-
-                i.putExtra("array", (Serializable)animaux);
-                startActivity(i);
+                wordList = getArrayWord("ANIMAUX.txt" );
+                theme = 3;
                 break;
+
             case 4:
-
-                i.putExtra("array", (Serializable)fruit);
-                startActivity(i);
+                wordList = getArrayWord("FRUIT.txt" );
+                theme = 4;
                 break;
-            case 5:
 
-                i.putExtra("array", (Serializable)couleur);
-                startActivity(i);
+            case 5:
+                wordList = getArrayWord("COULEUR.txt" );
+                theme = 5;
                 break;
 
             case 6:
-
-                i.putExtra("array", (Serializable)vetement);
-                startActivity(i);
+                wordList = getArrayWord("VETEMENT.txt" );
+                theme = 6;
                 break;
+
             case 7:
-
-                i.putExtra("array", (Serializable)ALeatoire);
-                startActivity(i);
+                wordList = getArrayWord("ALEA.txt" );
+                theme = 7;
                 break;
+            }
 
 
-        }
+      //  i.putExtra("array", (Serializable)wordList);
+       // i.putExtra("indice", (Serializable)comList);
+        i.putExtra("theme", theme );
 
+
+        startActivity(i);
     }
 
-   public ArrayList<String> getArrayWorld(String fichier){
+    public  ArrayList<String> getArrayWord(String fichier){
+        ArrayList<String> tab = new ArrayList<String>();
+        try {
+            //Lecture du fichier dans lequel se trouve les mots et affectation a un tableau
+            BufferedReader buffer = new BufferedReader( new InputStreamReader(getAssets().open(fichier)));
+            String line;
+            while((line = buffer.readLine()) != null){
+                tab.add(line); }
+            buffer.close();
+        } catch (IOException e) {
+            e.printStackTrace(); }
 
-       try {
-           BufferedReader buffer = new BufferedReader( new InputStreamReader(getAssets().open(fichier)));
-           String word;
-           while((word = buffer.readLine()) != null){
-               wordList.add(word);
-
-
-           }
-           buffer.close();
-
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+        return tab; }
 
 
-       return wordList;
-   }
 
 
 }

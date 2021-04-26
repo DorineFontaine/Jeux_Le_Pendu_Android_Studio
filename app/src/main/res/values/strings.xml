@@ -2,4 +2,7 @@
     <string name="app_name">LePendu</string>
     <string name="rejouer">REJOUER</string>
     <string name="menu">MENU</string>
+    <string name="defaite">Le mot à deviner était </string>
+    <string name="pays">PAYS</string>
+    <string name="ville">VILLE</string>
 </resources>
