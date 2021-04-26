@@ -1,4 +1,4 @@
- package com.example.lependu_38007562;
+     package com.example.lependu_38007562;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -31,11 +31,11 @@ import java.util.ArrayList;
     String word;
     String letter_revealed;
     String indice;
+    String fichier;
 
     LinearLayout container;
     private ImageView images;
     Dialog dialog_result,dialog_help;
-    Activity_liste Aleatoire;
     TextView Showscore;
 
     //TABLEAUX
@@ -44,27 +44,12 @@ import java.util.ArrayList;
     ArrayList<Button> listeButton;
     ArrayList<String> myArray;
     ArrayList<String> myArrayCom;
-    String fichier;
-
-    //TABLEAU
-     String[] T = {"PAYS.txt","VILLE.txt","VOITURE.txt","ANIMAUX.txt"};
-
-
-
-
-
-
-    //String[] ALeatoire =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jeu);
-        Log.d("myTag", "je suis passer par ici1 ");
+
         //INITIALISATION
         listeButton = new ArrayList<Button>();
         letter_found_clavier = new ArrayList<String>();
@@ -73,7 +58,6 @@ import java.util.ArrayList;
 
         container = (LinearLayout)findViewById(R.id.word_container);
         images =(ImageView)findViewById(R.id.img_pendu);
-        Aleatoire = new Activity_liste();
         Showscore = findViewById(R.id.textView3);
 
 
@@ -81,29 +65,13 @@ import java.util.ArrayList;
         dialog_help = new Dialog(this);
 
 
-        Log.d("myTag", "je suis passer par ici2 ");
         //RECUPERATION DU TABLEAU DE MOT
         Bundle word_array = getIntent().getExtras();
         if (word_array!=null){
-            Log.d("test","non null");
-           // this.fichier = word_array.getString("String");
-            this.theme = word_array.getInt("theme");
-         //   myArray = getArrayWord(fichier);
-        }
+            this.fichier = word_array.getString("theme","ALEA.txt");
+            myArray = getArrayWord(fichier); }
 
-      /*  if (word_array != null){
-            Log.d("myTag", "je suis passer par ici3 ");
-            this.myArray = (ArrayList<String>) word_array.getSerializable("array");
-            this.theme = word_array.getInt("theme");
-          //  this.myArrayCom = (ArrayList<String>) word_array.getSerializable("indice");
-            }
 
-        else {
-            Log.d("myTag", "je suis passer par ici4 ");
-            this.myArray = (ArrayList<String>) Aleatoire.getArrayWord("ALEA.txt");
-            Log.d("myTag", "je suis passer par ici ");
-        }
-*/
         //DEBUT DU JEUX
         initJeux(); }
 
@@ -111,9 +79,7 @@ import java.util.ArrayList;
     public void initJeux() {
 
         Showscore.setText(String.valueOf(score)+"$");
-        Log.d("myTag", "je suis passer par ici init jeux ");
         word = generatedWord();
-        Log.d("myTag", "je suis passer apres generate ");
         error = 0;
         letter_found = 0;
         images.setBackgroundResource(R.drawable.first);
@@ -126,15 +92,16 @@ import java.util.ArrayList;
             container.addView(view); } }
 
 
+
+
+
     public String generatedWord(){
-        Log.d("myTag", "je suis passer par ici debut fonc");
         String mot;
-        random = (int) Math.floor(Math.random() *  T.length);
-        mot = T[random].trim();
-        Log.d("myTag", "je suis passer par ici fin fonc");
+        random = (int) Math.floor(Math.random() *  myArray.size());
+        mot = myArray.get(random).trim();
         return mot;}
 
-
+/************************************************************************/
     public ArrayList<String> ArrayLetterWord(String word){
         for (int i = 0; i < word.length(); i++){
             letter_word.add(String.valueOf(word.charAt(i))); }
@@ -155,7 +122,7 @@ import java.util.ArrayList;
     public void winOrnot(String b){
 
         //PARTIE GAGNER
-        if(letter_found==word.length()){
+        if(letter_found == word.length()){
             closeWinDialog(true);
             score += 5; }
 
@@ -209,8 +176,7 @@ import java.util.ArrayList;
         else{
             dialog_result.setContentView(R.layout.defaite);
             TextView mot = dialog_result.findViewById(R.id.textView4);
-            mot.setText("Le mot à deviner était "+""+ word);
-        }
+            mot.setText("Le mot à deviner était "+""+ word); }
 
         //BOUTON REJOUER
         Button btn= dialog_result.findViewById(R.id.btn_rejouer);
@@ -230,10 +196,7 @@ import java.util.ArrayList;
                 startActivity(j);
                 dialog_result.dismiss(); }});
 
-        dialog_result.show();
-
-
-    }
+        dialog_result.show(); }
 
     //ACTION DU CLAVIER
     public void pressButton(View v) {
@@ -263,8 +226,7 @@ import java.util.ArrayList;
             @Override
             public void onClick(View v) {
 
-                dialog_help.dismiss();
-            }});
+                dialog_help.dismiss(); }});
 
         //BOUTON DE REDIRECTION MENU
         Button btn_menu = dialog_help.findViewById(R.id.menu_jeux);
@@ -284,13 +246,8 @@ import java.util.ArrayList;
                     showLetter();
                     btn_lettre.setText(letter_revealed);
                     score -=5;
-                    Showscore.setText(String.valueOf(score)+"$");
-
-                }else{
-
-
-                }
-                }});
+                    Showscore.setText(String.valueOf(score)+"$"); }
+                else Showscore.setText("Score insuffisant"); }});
 
 
 
@@ -299,8 +256,7 @@ import java.util.ArrayList;
             @Override
             public void onClick(View v) {
                 showComment();
-                btn_commentaire.setText(indice);
-            }});
+                btn_commentaire.setText(indice); }});
 
         dialog_help.show();}
 
@@ -311,12 +267,10 @@ import java.util.ArrayList;
             for (String str : letter_word) {
                 letter_revealed = str;
                // letter_word.remove(letter_word.indexOf(str));
-
                 } }
         else{
             for (String str : letter_word) {
-                if(letter_found_clavier.contains(str)){//letter_word.remove(letter_word.indexOf(str));
-                     }
+                if(letter_found_clavier.contains(str)) Log.d("myTAG","On a trouver une lettre"); //letter_word.remove(letter_word.indexOf(str));
                 else{
                     letter_revealed = str;
                   //  letter_word.remove(letter_word.indexOf(str));
@@ -365,14 +319,7 @@ import java.util.ArrayList;
             case 7 :
                 Log.isLoggable("coucou",random);
                 indice = myArrayCom.get(random+21);
-                break;
-
-
-        }
-
-
-
-                    }
+                break; } }
 
     public  ArrayList<String> getArrayWord(String fichier){
          ArrayList<String> tab = new ArrayList<String>();

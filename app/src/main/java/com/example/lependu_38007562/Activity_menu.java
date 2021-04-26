@@ -14,9 +14,8 @@ import java.util.ArrayList;
 public class Activity_menu extends AppCompatActivity {
 
     //TABLEAUX ET VARIABLES
-    String[] ALea =  {"CHINE", "RUSSIE", "FRANCE", "CAROTTE", "COURGETTE", "OLIVE", "CHIEN", "CHAT", "ANE"};
     Bundle word_array;
-    Serializable myArray;
+    String myArray;
     
 
     @Override
@@ -28,7 +27,7 @@ public class Activity_menu extends AppCompatActivity {
 
         //On récupére le tableau de mot
         if (word_array != null){
-            myArray = word_array.getSerializable("array");
+            myArray = word_array.getString("theme");
         } }
 
     //REDIRECTION VERS LE JEUX
@@ -36,14 +35,9 @@ public class Activity_menu extends AppCompatActivity {
 
         //On transmet le tableau de mot à l'activité Jeux
         Intent i = new Intent(this, Activity_Jeu.class);
-        if (myArray == null){
-
-            i.putExtra("array", (Serializable)ALea);
-            startActivity(i); }
-        else{
-
-            i.putExtra("array", myArray); }
+        i.putExtra("theme", word_array);
         startActivity(i); }
+
 
     //REDIRECTION VERS LE JEUX
     public void getSetUp(View view) {
