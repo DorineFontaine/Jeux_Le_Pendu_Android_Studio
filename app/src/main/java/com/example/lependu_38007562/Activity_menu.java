@@ -35,7 +35,7 @@ public class Activity_menu extends AppCompatActivity {
 
         //On transmet le tableau de mot à l'activité Jeux
         Intent i = new Intent(this, Activity_Jeu.class);
-        i.putExtra("theme", word_array);
+        i.putExtra("theme", myArray);
         startActivity(i); }
 
 
