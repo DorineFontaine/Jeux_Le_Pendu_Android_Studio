@@ -17,7 +17,7 @@ public class Activity_liste extends Activity {
 
     //TABLEAU ET VARIABLE
     ListView simpleList;
-    String countryList[] = {String.valueOf(R.string.pays), "VILLE", "MARQUE DE VOITURE ", "ANIMAUX", "FRUITS ET LEGUMES", "COULEURS","MARQUE DE VETEMENTS","ALEATOIRE"};
+    String countryList[] = {"PAYS", "VILLE", "MARQUE DE VOITURE ", "ANIMAUX", "FRUITS ET LEGUMES", "COULEURS","MARQUE DE VETEMENTS","ALEATOIRE"};
     int flags[] = {R.drawable.drapeau, R.drawable.ville, R.drawable.voiture, R.drawable.animaux, R.drawable.fruit, R.drawable.couleur,R.drawable.vetement,R.drawable.aleatoire};
 
     Intent i;

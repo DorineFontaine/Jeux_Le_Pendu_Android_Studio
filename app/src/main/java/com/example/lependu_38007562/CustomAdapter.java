@@ -1,15 +1,12 @@
 package com.example.lependu_38007562;
 import android.content.Context;
-import android.graphics.Color;
-import android.media.Image;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.zip.Inflater;
 
     public class CustomAdapter extends BaseAdapter {
         Context context;
@@ -40,6 +37,7 @@ import java.util.zip.Inflater;
         }
 
         @Override
+        //ON GENERE AUTOMATIQUEMENT LES CELLULES DE LA LISTE
         public View getView(int i, View view, ViewGroup viewGroup) {
             view = inflater.inflate(R.layout.activity_listview, null);
 
@@ -47,16 +45,12 @@ import java.util.zip.Inflater;
             ImageView icon = (ImageView) view.findViewById(R.id.icon);
             country.setText(countryList[i]);
             icon.setImageResource(flags[i]);
-            return view;
-        }
+            return view; }
+
+            //ON RECUPERE LES DEUXIEME LINEAR LAYOUT POUR COLORER ENTIERE LA CELLULE SELECTIONNER
         public View getView2(View view){
 
             View view2 = view.findViewById(R.id.linearLayout2);
-            return view2;
-
-        }
-
-
-
+            return view2; }
     }
 

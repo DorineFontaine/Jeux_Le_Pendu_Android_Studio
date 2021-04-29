@@ -5,4 +5,7 @@
     <string name="defaite">Le mot à deviner était </string>
     <string name="pays">PAYS</string>
     <string name="ville">VILLE</string>
+    <string name="animaux">ANIMAUX</string>
+    <string name="fruit">FRUIT ET LEGUME</string>
+    <string name="voiture">VILLE</string>
 </resources>
