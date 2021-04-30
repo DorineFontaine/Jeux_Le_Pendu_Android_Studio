@@ -87,8 +87,8 @@ import java.util.ArrayList;
 
 
     public void initJeux() {
-       // s = load();
-      //  Showscore.setText(s + "$");
+     //   s = load();
+        Showscore.setText(String.valueOf(score) + "$");
         word = generatedWord();
         error = 0;
         letter_found = 0;
@@ -135,6 +135,7 @@ import java.util.ArrayList;
         if(letter_found == word.length()){
             closeWinDialog(true);
             score += 5;
+            Showscore.setText(String.valueOf(score) + "$");
            // s = String.valueOf(score);
             //save();
         }
@@ -261,11 +262,12 @@ import java.util.ArrayList;
                     showLetter();
                     btn_lettre.setText(letter_revealed);
                     score -=5;
+                    Showscore.setText(String.valueOf(score) + "$");
                   //  save();
                  //   s = String.valueOf(score);
                  //   Showscore.setText(s + "$");
                     }
-                else Showscore.setText("Score insuffisant"); }});
+                else btn_lettre.setText("Score insuffisant"); }});
 
 
 
@@ -277,12 +279,13 @@ import java.util.ArrayList;
                     showComment(fichier);
                     btn_commentaire.setText(indice);
                     score -=5;
+                    Showscore.setText(String.valueOf(score) + "$");
                   //  save();
                   //  s = String.valueOf(score);
                  //   Showscore.setText(s + "$");
 
                 }
-                else Showscore.setText("Score insuffisant");
+                else btn_commentaire.setText("Score insuffisant");
                  }});
 
         dialog_help.show();}
